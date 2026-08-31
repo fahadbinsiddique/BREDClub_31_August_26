@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 600 600"
+     width="700"
+     height="700">
+
+    <defs>
+        <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#0A4FBF"/>
+            <stop offset="100%" stop-color="#16A34A"/>
+        </linearGradient>
+
+        <filter id="shadow">
+            <feDropShadow dx="0" dy="4" stdDeviation="6"
+                flood-opacity=".12"/>
+        </filter>
+    </defs>
+
+    <!-- Ring -->
+    <circle
+        cx="300"
+        cy="300"
+        r="235"
+        fill="white"
+        stroke="url(#g)"
+        stroke-width="8"/>
+
+    <g filter="url(#shadow)">
+
+        <!-- Open Book -->
+        <path
+            d="
+            M190 375
+            Q245 338 300 355
+            Q355 338 410 375
+            L410 398
+            Q355 375 300 390
+            Q245 375 190 398
+            Z"
+            fill="#0A4FBF"/>
+
+        <!-- Center Person -->
+        <circle
+            cx="300"
+            cy="230"
+            r="17"
+            fill="#0A4FBF"/>
+
+        <!-- Body / Stem -->
+        <path
+            d="
+            M292 247
+            C292 275 292 305 292 340
+            C292 352 308 352 308 340
+            C308 305 308 275 308 247
+            Z"
+            fill="#16A34A"/>
+
+        <!-- Left Human Leaf -->
+        <path
+            d="
+            M298 265
+            C250 255 220 215 230 150
+            C270 162 305 205 298 265
+            Z"
+            fill="#16A34A"/>
+
+        <!-- Right Human Leaf -->
+        <path
+            d="
+            M302 265
+            C350 255 380 215 370 150
+            C330 162 295 205 302 265
+            Z"
+            fill="#16A34A"/>
+
+        <!-- Arms blending into leaves -->
+        <path
+            d="
+            M300 280
+            C270 260 245 245 230 225"
+            stroke="#16A34A"
+            stroke-width="8"
+            stroke-linecap="round"
+            fill="none"/>
+
+        <path
+            d="
+            M300 280
+            C330 260 355 245 370 225"
+            stroke="#16A34A"
+            stroke-width="8"
+            stroke-linecap="round"
+            fill="none"/>
+
+    </g>
+
+    <!-- Name -->
+    <text
+        x="300"
+        y="470"
+        text-anchor="middle"
+        font-family="Poppins, Segoe UI, sans-serif"
+        font-size="42"
+        font-weight="700"
+        fill="#0A4FBF">
+        BREDClub
+    </text>
+
+</svg>

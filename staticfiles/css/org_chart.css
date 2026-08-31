@@ -1,0 +1,45 @@
+/* Card dimension limits and interaction transitions */
+.org-card {
+    min-height: 290px;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
+    z-index: 2;
+}
+
+.org-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08) !important;
+}
+
+/* Rounded Profile Images inside Bootstrap structure */
+.org-avatar {
+    width: 85px;
+    height: 85px;
+    object-fit: cover;
+    border: 3px solid #f8f9fa;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+/* Custom visual connectors overlaying Bootstrap grids */
+.tree-line-vertical {
+    width: 2px;
+    height: 30px;
+    background-color: #dee2e6;
+}
+
+.tree-line-vertical-short {
+    width: 2px;
+    height: 15px;
+    background-color: #dee2e6;
+}
+
+.tree-line-horizontal {
+    width: 100%;
+    height: 2px;
+    background-color: #dee2e6;
+}
+
+/* Interactive Active Card state via JS */
+.org-card.selected-path {
+    outline: 2px solid #0d6efd;
+    background-color: #f8f9ff;
+}

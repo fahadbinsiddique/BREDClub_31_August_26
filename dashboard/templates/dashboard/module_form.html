@@ -1,0 +1,32 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}{{ mode }} {{ module.title }} - Dashboard{% endblock %}
+{% block page_title %}{{ mode }} {{ module.title }}{% endblock %}
+
+{% block content %}
+<section class="panel form-panel">
+    <div class="panel-heading">
+        <div>
+            <span class="panel-kicker">{{ module.description }}</span>
+            <h2>{{ mode }} Record</h2>
+        </div>
+        <a class="soft-btn" href="{% url 'dashboard:module_list' module.slug %}">Back to List</a>
+    </div>
+    <form class="dashboard-form" method="post" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+        {% for field in form %}
+            <label>
+                {{ field.label }}
+                {{ field }}
+                {% if field.help_text %}<small>{{ field.help_text }}</small>{% endif %}
+                {% for error in field.errors %}<small class="form-error">{{ error }}</small>{% endfor %}
+            </label>
+        {% endfor %}
+        {% for error in form.non_field_errors %}<small class="form-error">{{ error }}</small>{% endfor %}
+        <div class="form-actions">
+            <button type="submit" class="primary-btn">Save</button>
+            <a class="soft-btn" href="{% url 'dashboard:module_list' module.slug %}">Cancel</a>
+        </div>
+    </form>
+</section>
+{% endblock %}

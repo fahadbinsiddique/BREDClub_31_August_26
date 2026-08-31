@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ meta_title }}{% endblock %}
+
+{% block content %}
+<section class="page-banner">
+    <div class="page-banner-overlay"></div>
+    <div class="page-banner-content">
+        <h1 class="page-banner-title">{{ event.title }}</h1>
+        <nav class="breadcrumb"><a href="{% url 'home:index' %}">Home</a><span>/</span><a href="{% url 'home:events' %}">Events</a><span>/</span><span>{{ event.title }}</span></nav>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container detail-layout">
+        <article class="detail-content">
+            {% if event.poster %}<img src="{{ event.poster.url }}" alt="{{ event.title }}" class="detail-image" loading="lazy" decoding="async">{% endif %}
+            <div class="event-meta detail-meta"><span>{{ event.date|date:"M d, Y" }}</span><span>{{ event.time|time:"g:i A"|default:'Time TBA' }}</span><span>{{ event.location }}</span></div>
+            {{ event.description|linebreaks }}
+            {% if event.registration_link %}<a href="{{ event.registration_link }}" class="btn btn-primary" target="_blank" rel="noopener">Register Now</a>{% endif %}
+        </article>
+        <aside class="detail-sidebar">
+            <h3>Related Events</h3>
+            {% for item in related_events %}
+                <a href="{{ item.get_absolute_url }}" class="sidebar-link">{{ item.title }}<span>{{ item.date|date:"M d, Y" }}</span></a>
+            {% empty %}
+                <p>No related events available.</p>
+            {% endfor %}
+        </aside>
+    </div>
+</section>
+{% endblock %}

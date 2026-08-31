@@ -1,0 +1,60 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}{{ module.title }} - Dashboard{% endblock %}
+{% block page_title %}{{ module.title }}{% endblock %}
+
+{% block content %}
+<section class="panel">
+    <div class="panel-heading">
+        <div>
+            <span class="panel-kicker">{{ module.description }}</span>
+            <h2>Manage {{ module.title }}</h2>
+        </div>
+        <a class="primary-btn" href="{% url 'dashboard:module_create' module.slug %}">Create New</a>
+    </div>
+
+    <form class="dashboard-search" method="get">
+        <input type="search" name="q" value="{{ query }}" placeholder="Search {{ module.title }}">
+        <button class="soft-btn" type="submit">Search</button>
+        {% if query %}<a class="ghost-btn" href="{% url 'dashboard:module_list' module.slug %}">Clear</a>{% endif %}
+    </form>
+
+    <div class="content-table">
+        <div class="table-row table-head">
+            <span>Title</span>
+            <span>Status</span>
+            <span>Updated</span>
+            <span>Actions</span>
+        </div>
+        {% for row in rows %}
+        <div class="table-row">
+            <span>
+                <strong>{{ row.title }}</strong>
+                <small>{{ row.summary }}</small>
+            </span>
+            <span><mark class="status live">{{ row.status|default:"Saved" }}</mark></span>
+            <span>{% if row.updated_at %}{{ row.updated_at|date:"M d, Y H:i" }}{% else %}-{% endif %}</span>
+            <span class="table-actions">
+                <a class="soft-btn" href="{% url 'dashboard:module_detail' module.slug row.object.pk %}">View</a>
+                <a class="soft-btn" href="{% url 'dashboard:module_update' module.slug row.object.pk %}">Edit</a>
+                <a class="soft-btn danger" href="{% url 'dashboard:module_delete' module.slug row.object.pk %}">Delete</a>
+            </span>
+        </div>
+        {% empty %}
+        <div class="empty-state">No records found.</div>
+        {% endfor %}
+    </div>
+
+    {% if page_obj.paginator.num_pages > 1 %}
+    <nav class="dashboard-pagination">
+        {% if page_obj.has_previous %}
+            <a class="soft-btn" href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query }}{% endif %}">Previous</a>
+        {% endif %}
+        <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+        {% if page_obj.has_next %}
+            <a class="soft-btn" href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query }}{% endif %}">Next</a>
+        {% endif %}
+    </nav>
+    {% endif %}
+</section>
+{% endblock %}

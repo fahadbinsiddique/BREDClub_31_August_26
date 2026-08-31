@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ meta_title }}{% endblock %}
+
+{% block content %}
+<section class="page-banner">
+    <div class="page-banner-overlay"></div>
+    <div class="page-banner-content">
+        <h1 class="page-banner-title">Blog</h1>
+        <nav class="breadcrumb"><a href="{% url 'home:index' %}">Home</a><span>/</span><span>Blog</span></nav>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="section-header fade-in">
+            <span class="section-tag">Our Blog</span>
+            <h2 class="section-title">Latest Articles</h2>
+            <div class="title-divider"></div>
+        </div>
+        <form class="site-search" method="get">
+            <input type="search" name="q" value="{{ query }}" placeholder="Search blog posts">
+            <select name="category">
+                <option value="">All Categories</option>
+                {% for category in categories %}
+                    <option value="{{ category.slug }}" {% if category_slug == category.slug %}selected{% endif %}>{{ category.name }}</option>
+                {% endfor %}
+            </select>
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+        <div class="blogs-grid">
+            {% for post in blogs %}
+            <article class="blog-card fade-in">
+                {% if post.featured_image %}<div class="blog-img-wrapper"><img src="{{ post.featured_image.url }}" alt="{{ post.title }}" class="blog-img" loading="lazy" decoding="async">{% if post.category %}<span class="blog-category">{{ post.category.name }}</span>{% endif %}</div>{% endif %}
+                <div class="blog-body">
+                    <div class="blog-meta"><span>{{ post.published_at|date:"M d, Y" }}</span><span>{{ post.author|default:'BREDClub' }}</span></div>
+                    <h3 class="blog-title">{{ post.title }}</h3>
+                    <p class="blog-excerpt">{{ post.excerpt|default:post.content|truncatewords:30 }}</p>
+                    <a href="{{ post.get_absolute_url }}" class="blog-link">Read More</a>
+                </div>
+            </article>
+            {% empty %}
+            <div class="empty-state">
+                <p>No blog posts match your current search.</p>
+                <small>Try a broader keyword or clear the filters to browse all published articles.</small>
+            </div>
+            {% endfor %}
+        </div>
+        {% if blogs.paginator.num_pages > 1 %}
+        <nav class="site-pagination">
+            {% if blogs.has_previous %}<a href="?page={{ blogs.previous_page_number }}{% if query %}&q={{ query }}{% endif %}{% if category_slug %}&category={{ category_slug }}{% endif %}">Previous</a>{% endif %}
+            <span>Page {{ blogs.number }} of {{ blogs.paginator.num_pages }}</span>
+            {% if blogs.has_next %}<a href="?page={{ blogs.next_page_number }}{% if query %}&q={{ query }}{% endif %}{% if category_slug %}&category={{ category_slug }}{% endif %}">Next</a>{% endif %}
+        </nav>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

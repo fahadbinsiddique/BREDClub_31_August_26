@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ meta_title }}{% endblock %}
+
+{% block content %}
+<section class="page-banner">
+    <div class="page-banner-overlay"></div>
+    <div class="page-banner-content">
+        <h1 class="page-banner-title">Photo Gallery</h1>
+        <nav class="breadcrumb"><a href="{% url 'home:index' %}">Home</a><span>/</span><span>Gallery</span></nav>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="section-header fade-in">
+            <span class="section-tag">Our Memories</span>
+            <h2 class="section-title">Photo Gallery</h2>
+            <div class="title-divider"></div>
+        </div>
+        {% if albums %}
+        <div class="album-grid">
+            {% for album in albums %}
+            <article class="blog-card fade-in">
+                {% if album.cover_image %}<div class="blog-img-wrapper"><img src="{{ album.cover_image.url }}" alt="{{ album.title }}" class="blog-img" loading="lazy" decoding="async"></div>{% endif %}
+                <div class="blog-body">
+                    <h3 class="blog-title">{{ album.title }}</h3>
+                    <p class="blog-excerpt">{{ album.description|default:'Gallery album' }}</p>
+                    <small>{{ album.images.count }} Images</small>
+                </div>
+            </article>
+            {% empty %}
+            <div class="empty-state">No gallery albums have been published yet. New albums will appear here once content is added from the dashboard.</div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">No gallery albums have been published yet.</div>
+        {% endif %}
+        <div class="gallery-grid">
+            {% for photo in images %}
+            <a class="gallery-item fade-in" href="{{ photo.image.url }}" target="_blank" rel="noopener">
+                <img src="{{ photo.image.url }}" alt="{{ photo.title }}" class="gallery-img" loading="lazy" decoding="async">
+                <div class="gallery-overlay"><div class="gallery-overlay-content"><span>{{ photo.title }}</span></div></div>
+            </a>
+            {% empty %}
+            <div class="empty-state">No gallery images have been published yet.</div>
+            {% endfor %}
+        </div>
+        {% if images.paginator.num_pages > 1 %}
+        <nav class="site-pagination">
+            {% if images.has_previous %}<a href="?page={{ images.previous_page_number }}">Previous</a>{% endif %}
+            <span>Page {{ images.number }} of {{ images.paginator.num_pages }}</span>
+            {% if images.has_next %}<a href="?page={{ images.next_page_number }}">Next</a>{% endif %}
+        </nav>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

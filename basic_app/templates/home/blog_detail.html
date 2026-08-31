@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ meta_title }}{% endblock %}
+
+{% block content %}
+<section class="page-banner">
+    <div class="page-banner-overlay"></div>
+    <div class="page-banner-content">
+        <h1 class="page-banner-title">{{ post.title }}</h1>
+        <nav class="breadcrumb"><a href="{% url 'home:index' %}">Home</a><span>/</span><a href="{% url 'home:blog' %}">Blog</a><span>/</span><span>{{ post.title }}</span></nav>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container detail-layout">
+        <article class="detail-content">
+            {% if post.featured_image %}<img src="{{ post.featured_image.url }}" alt="{{ post.title }}" class="detail-image" loading="lazy" decoding="async">{% endif %}
+            <div class="blog-meta detail-meta"><span>{{ post.published_at|date:"M d, Y" }}</span><span>{{ post.author|default:'BREDClub' }}</span>{% if post.category %}<span>{{ post.category.name }}</span>{% endif %}</div>
+            {{ post.content|safe|linebreaks }}
+        </article>
+        <aside class="detail-sidebar">
+            <h3>Recent Posts</h3>
+            {% for item in recent_posts %}
+                <a href="{{ item.get_absolute_url }}" class="sidebar-link">{{ item.title }}<span>{{ item.published_at|date:"M d, Y" }}</span></a>
+            {% empty %}
+                <p>No recent posts available.</p>
+            {% endfor %}
+            <h3>Related Posts</h3>
+            {% for item in related_posts %}
+                <a href="{{ item.get_absolute_url }}" class="sidebar-link">{{ item.title }}<span>{{ item.published_at|date:"M d, Y" }}</span></a>
+            {% empty %}
+                <p>No related posts available.</p>
+            {% endfor %}
+        </aside>
+    </div>
+</section>
+{% endblock %}

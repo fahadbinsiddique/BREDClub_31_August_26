@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Dashboard - BREDClub{% endblock %}</title>
+    <link rel="icon" type="image/svg+xml" href="{% static 'icons/logo.jpg' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+    <div class="dashboard-shell">
+        <aside class="dashboard-sidebar">
+            <button class="sidebar-close" type="button" data-sidebar-toggle aria-label="Close sidebar">
+                <span></span>
+                <span></span>
+            </button>
+            <a href="{% url 'dashboard:overview' %}" class="dashboard-brand">
+                <span class="banner-logo">
+                    <img src="{% static 'icons/logo.jpg' %}" alt="Logo" width="50">
+                </span>
+                <span>
+                    <strong class="banner-brand">BRED<span>Club</span></strong>
+                    <small>Admin Panel</small>
+                </span>
+            </a>
+
+            <nav class="dashboard-nav" aria-label="Dashboard navigation">
+                <a href="{% url 'dashboard:overview' %}" class="{% if request.resolver_match.url_name == 'overview' %}active{% endif %}">
+                    <span>Overview</span>
+                </a>
+                <a href="{% url 'dashboard:content' %}" class="{% if request.resolver_match.url_name == 'content' %}active{% endif %}">
+                    <span>Content</span>
+                </a>
+                <a href="{% url 'dashboard:messages' %}" class="{% if request.resolver_match.url_name == 'messages' %}active{% endif %}">
+                    <span>Messages</span>
+                </a>
+                <a href="{% url 'dashboard:settings' %}" class="{% if request.resolver_match.url_name == 'settings' %}active{% endif %}">
+                    <span>Settings</span>
+                </a>
+                <a href="{% url 'dashboard:password_change' %}" class="{% if request.resolver_match.url_name == 'password_change' %}active{% endif %}">
+                    <span>Password</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-card">
+                <span>Django Auth</span>
+                <p>Protected workspace for staff and superuser accounts.</p>
+            </div>
+        </aside>
+
+        <main class="dashboard-main">
+            <section class="dashboard-banner">
+                <div class="banner-brand">
+                    <span class="banner-logo">
+                        <img src="{% static 'icons/logo.jpg' %}" alt="Logo" width="50">
+                    </span>
+                    <div>
+                        <strong>BRED<span>Club</span></strong>
+                        <p>The Business Research &amp; Entrepreneurs Development Club</p>
+                        <small>Empowerment Through Development</small>
+                    </div>
+                </div>
+                <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-label="Toggle sidebar" aria-expanded="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </section>
+
+            <header class="dashboard-topbar">
+                <div>
+                    <p class="eyebrow">Admin Workspace</p>
+                    <h1>{% block page_title %}Dashboard{% endblock %}</h1>
+                </div>
+                <div class="topbar-actions">
+                    <a href="{% url 'home:index' %}" class="ghost-btn">View Site</a>
+                    <div class="admin-chip">
+                        <span>{{ request.user.get_full_name|default:'Admin' }}</span>
+                        <strong>{{ request.user.username|default:'Staff' }}</strong>
+                    </div>
+                    <form method="post" action="{% url 'dashboard:logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="soft-btn">Logout</button>
+                    </form>
+                </div>
+            </header>
+
+            {% if messages %}
+            <div class="dashboard-alerts">
+                {% for message in messages %}
+                    <div class="dashboard-alert {{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+    <script src="{% static 'js/dashboard.js' %}" defer></script>
+</body>
+</html>

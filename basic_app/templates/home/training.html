@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ meta_title }}{% endblock %}
+
+{% block content %}
+<section class="page-banner">
+    <div class="page-banner-overlay"></div>
+    <div class="page-banner-content">
+        <h1 class="page-banner-title">Training Programs</h1>
+        <nav class="breadcrumb"><a href="{% url 'home:index' %}">Home</a><span>/</span><span>Training</span></nav>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="section-header fade-in">
+            <span class="section-tag">Skill Development</span>
+            <h2 class="section-title">All Training Programs</h2>
+            <div class="title-divider"></div>
+        </div>
+        <div class="training-grid">
+            {% for item in trainings %}
+            <div class="training-card fade-in">
+                {% if item.image %}
+                <div class="training-img-wrapper">
+                    <img src="{{ item.image.url }}" alt="{{ item.title }}" class="training-img" loading="lazy" decoding="async">
+                    <span class="training-badge {% if item.training_status == 'upcoming' %}upcoming{% endif %}">{{ item.get_training_status_display }}</span>
+                </div>
+                {% endif %}
+                <div class="training-body">
+                    <div class="training-meta"><span>{{ item.duration|default:'Flexible' }}</span><span>{{ item.seats }} Seats</span></div>
+                    <h3 class="training-title">{{ item.title }}</h3>
+                    <p class="training-desc">{{ item.description }}</p>
+                    {% if item.start_date %}<p class="training-desc">Starts: {{ item.start_date|date:"M d, Y" }}</p>{% endif %}
+                    {% if item.application_link %}<a href="{{ item.application_link }}" class="btn btn-sm btn-primary" target="_blank" rel="noopener">Apply Now</a>{% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <div class="empty-state">No training programs have been published yet.</div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

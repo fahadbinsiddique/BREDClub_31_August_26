@@ -1,0 +1,53 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Messages - BREDClub{% endblock %}
+{% block page_title %}Messages{% endblock %}
+
+{% block content %}
+<section class="message-layout">
+    <div class="panel message-list">
+        <div class="panel-heading compact">
+            <div>
+                <span class="panel-kicker">Inbox</span>
+                <h2>Contact Requests</h2>
+            </div>
+        </div>
+        {% for item in message_list %}
+        <a class="message-item {% if selected_message and selected_message.pk == item.pk %}active{% endif %}" href="{% url 'dashboard:messages' %}?selected={{ item.pk }}">
+            <strong>{{ item.name }}</strong>
+            <span>{{ item.subject }}</span>
+            <small>{{ item.created_at|date:"M d, Y H:i" }} - {{ item.get_status_display }}</small>
+        </a>
+        {% empty %}
+        <div class="empty-state">No contact messages yet.</div>
+        {% endfor %}
+    </div>
+
+    <div class="panel message-detail">
+        {% if selected_message %}
+        <div class="message-header">
+            <div>
+                <span class="panel-kicker">Selected Message</span>
+                <h2>{{ selected_message.subject }}</h2>
+            </div>
+            <mark class="status live">{{ selected_message.get_status_display }}</mark>
+        </div>
+        <div class="message-meta">
+            <strong>{{ selected_message.name }}</strong>
+            <span>{{ selected_message.email }}</span>
+            {% if selected_message.phone %}<span>{{ selected_message.phone }}</span>{% endif %}
+        </div>
+        <p>{{ selected_message.message|linebreaks }}</p>
+        <div class="reply-box">
+            <form method="post">
+                {% csrf_token %}
+                <button class="primary-btn" type="submit">Mark Resolved</button>
+            </form>
+            <a class="soft-btn" href="{% url 'dashboard:module_update' 'contact-messages' selected_message.pk %}">Edit Message</a>
+        </div>
+        {% else %}
+        <div class="empty-state">Select a message to view details.</div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

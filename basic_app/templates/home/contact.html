@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ meta_title }}{% endblock %}
+
+{% block content %}
+<section class="page-banner">
+    <div class="page-banner-overlay"></div>
+    <div class="page-banner-content">
+        <h1 class="page-banner-title">Contact Us</h1>
+        <nav class="breadcrumb"><a href="{% url 'home:index' %}">Home</a><span>/</span><span>Contact</span></nav>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="section-header fade-in">
+            <span class="section-tag">Get In Touch</span>
+            <h2 class="section-title">Contact Information</h2>
+            <div class="title-divider"></div>
+        </div>
+
+        <div class="contact-cards fade-in">
+            <div class="contact-info-card">
+                <h3 class="contact-info-title">Our Address</h3>
+                <p class="contact-info-desc">{{ site_settings.address|default:'Dhanmondi, Dhaka-1205, Bangladesh'|linebreaksbr }}</p>
+            </div>
+            <div class="contact-info-card">
+                <h3 class="contact-info-title">Phone</h3>
+                <p class="contact-info-desc">{{ site_settings.phone_primary|default:'+880 1700-000000' }}{% if site_settings.phone_secondary %}<br>{{ site_settings.phone_secondary }}{% endif %}</p>
+            </div>
+            <div class="contact-info-card">
+                <h3 class="contact-info-title">Email</h3>
+                <p class="contact-info-desc">{{ site_settings.email_primary|default:'info@bredclub.org' }}{% if site_settings.email_secondary %}<br>{{ site_settings.email_secondary }}{% endif %}</p>
+            </div>
+            <div class="contact-info-card">
+                <h3 class="contact-info-title">Office Hours</h3>
+                <p class="contact-info-desc">{{ site_settings.office_hours|default:'Sat - Thu: 10:00 AM - 6:00 PM' }}</p>
+            </div>
+        </div>
+
+        <div class="form-container fade-in" style="margin-top:50px">
+            <h3 class="form-title">Send Us a Message</h3>
+            <p class="form-helper-text">Share your question or inquiry and we will get back to you as soon as possible.</p>
+            <form class="volunteer-form" method="post" id="contactForm" novalidate>
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="{{ form.name.id_for_label }}">Full Name *</label>
+                        {{ form.name }}
+                        {% for error in form.name.errors %}<p class="form-msg error">{{ error }}</p>{% endfor %}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.email.id_for_label }}">Email Address *</label>
+                        {{ form.email }}
+                        {% for error in form.email.errors %}<p class="form-msg error">{{ error }}</p>{% endfor %}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="{{ form.phone.id_for_label }}">Phone Number</label>
+                        {{ form.phone }}
+                        {% for error in form.phone.errors %}<p class="form-msg error">{{ error }}</p>{% endfor %}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.subject.id_for_label }}">Subject *</label>
+                        {{ form.subject }}
+                        {% for error in form.subject.errors %}<p class="form-msg error">{{ error }}</p>{% endfor %}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.message.id_for_label }}">Message *</label>
+                    {{ form.message }}
+                    {% for error in form.message.errors %}<p class="form-msg error">{{ error }}</p>{% endfor %}
+                </div>
+                {% for error in form.non_field_errors %}<p class="form-msg error">{{ error }}</p>{% endfor %}
+                <div class="contact-form-actions">
+                    <button type="submit" class="btn btn-primary contact-submit-btn">Send Message</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

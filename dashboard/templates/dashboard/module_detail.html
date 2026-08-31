@@ -1,0 +1,32 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}{{ object }} - Dashboard{% endblock %}
+{% block page_title %}{{ module.title }} Details{% endblock %}
+
+{% block content %}
+<section class="panel">
+    <div class="panel-heading">
+        <div>
+            <span class="panel-kicker">{{ module.title }}</span>
+            <h2>{{ object }}</h2>
+        </div>
+        <div class="topbar-actions">
+            <a class="soft-btn" href="{% url 'dashboard:module_list' module.slug %}">Back</a>
+            <a class="primary-btn" href="{% url 'dashboard:module_update' module.slug object.pk %}">Edit</a>
+            <a class="soft-btn danger" href="{% url 'dashboard:module_delete' module.slug object.pk %}">Delete</a>
+        </div>
+    </div>
+    <div class="detail-grid">
+        {% for field in fields %}
+        <div class="detail-item">
+            <span>{{ field.label }}</span>
+            {% if field.is_file %}
+                <a href="{{ field.value.url }}" target="_blank" rel="noopener">Open file</a>
+            {% else %}
+                <strong>{{ field.value|default:"-"|linebreaksbr }}</strong>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

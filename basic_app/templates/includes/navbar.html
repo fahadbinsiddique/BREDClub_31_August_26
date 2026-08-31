@@ -1,0 +1,494 @@
+{% load static %} {% comment %}
+<!-- ============================================
+     নেভিগেশন বার
+     Board of Members ও Executive Committee
+     About এর পরে অবস্থিত
+============================================= -->
+<header class="navbar" id="navbar">
+  <div class="container">
+    <div class="navbar-inner">
+      <a href="{% url 'home:index' %}" class="navbar-logo">
+        <span class="logo-text">BRED<span class="logo-accent">Club</span></span>
+        <span class="logo-tagline">Empowerment Through Development</span>
+      </a>
+      <nav class="nav-menu" id="navMenu">
+        <ul class="nav-list">
+          <li>
+            <a
+              href="{% url 'home:index' %}"
+              class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}"
+              >Home</a
+            >
+          </li>
+          <li>
+            <a
+              href="{% url 'home:about' %}"
+              class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}"
+              >About</a
+            >
+          </li>
+          <li>
+            <a
+              href="{% url 'home:board_members' %}"
+              class="nav-link {% if request.resolver_match.url_name == 'board_members' %}active{% endif %}"
+              >Board of Members</a
+            >
+          </li>
+          <li>
+            <a
+              href="{% url 'home:executive_committee' %}"
+              class="nav-link {% if request.resolver_match.url_name == 'executive_committee' %}active{% endif %}"
+              >Executive Committee</a
+            >
+          </li>
+          <li>
+            <a
+              href="{% url 'home:activities' %}"
+              class="nav-link {% if request.resolver_match.url_name == 'activities' %}active{% endif %}"
+              >Activities</a
+            >
+          </li>
+          <li>
+            <a
+              href="{% url 'home:training' %}"
+              class="nav-link {% if request.resolver_match.url_name == 'training' %}active{% endif %}"
+              >Training</a
+            >
+          </li>
+          <li>
+            <a
+              href="{% url 'home:events' %}"
+              class="nav-link {% if request.resolver_match.url_name == 'events' %}active{% endif %}"
+              >Events</a
+            >
+          </li>
+          <li>
+            <a
+              href="{% url 'home:blog' %}"
+              class="nav-link {% if request.resolver_match.url_name == 'blog' %}active{% endif %}"
+              >Blog</a
+            >
+          </li>
+          <li>
+            <a
+              href="{% url 'home:gallery' %}"
+              class="nav-link {% if request.resolver_match.url_name == 'gallery' %}active{% endif %}"
+              >Gallery</a
+            >
+          </li>
+          <li>
+            <a
+              href="{% url 'home:notice' %}"
+              class="nav-link {% if request.resolver_match.url_name == 'notice' %}active{% endif %}"
+              >Notice</a
+            >
+          </li>
+          <li>
+            <a
+              href="{% url 'home:volunteer' %}"
+              class="nav-link {% if request.resolver_match.url_name == 'volunteer' %}active{% endif %}"
+              >Volunteer</a
+            >
+          </li>
+          <li>
+            <a
+              href="{% url 'home:contact' %}"
+              class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}"
+              >Contact</a
+            >
+          </li>
+        </ul>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <ul class="mobile-nav-list">
+      <li>
+        <a
+          href="{% url 'home:index' %}"
+          class="mobile-nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}"
+          >Home</a
+        >
+      </li>
+      <li>
+        <a
+          href="{% url 'home:about' %}"
+          class="mobile-nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}"
+          >About</a
+        >
+      </li>
+      <li>
+        <a
+          href="{% url 'home:board_members' %}"
+          class="mobile-nav-link {% if request.resolver_match.url_name == 'board_members' %}active{% endif %}"
+          >Board of Members</a
+        >
+      </li>
+      <li>
+        <a
+          href="{% url 'home:executive_committee' %}"
+          class="mobile-nav-link {% if request.resolver_match.url_name == 'executive_committee' %}active{% endif %}"
+          >Executive Committee</a
+        >
+      </li>
+      <li>
+        <a
+          href="{% url 'home:activities' %}"
+          class="mobile-nav-link {% if request.resolver_match.url_name == 'activities' %}active{% endif %}"
+          >Activities</a
+        >
+      </li>
+      <li>
+        <a
+          href="{% url 'home:training' %}"
+          class="mobile-nav-link {% if request.resolver_match.url_name == 'training' %}active{% endif %}"
+          >Training</a
+        >
+      </li>
+      <li>
+        <a
+          href="{% url 'home:events' %}"
+          class="mobile-nav-link {% if request.resolver_match.url_name == 'events' %}active{% endif %}"
+          >Events</a
+        >
+      </li>
+      <li>
+        <a
+          href="{% url 'home:blog' %}"
+          class="mobile-nav-link {% if request.resolver_match.url_name == 'blog' %}active{% endif %}"
+          >Blog</a
+        >
+      </li>
+      <li>
+        <a
+          href="{% url 'home:gallery' %}"
+          class="mobile-nav-link {% if request.resolver_match.url_name == 'gallery' %}active{% endif %}"
+          >Gallery</a
+        >
+      </li>
+      <li>
+        <a
+          href="{% url 'home:notice' %}"
+          class="mobile-nav-link {% if request.resolver_match.url_name == 'notice' %}active{% endif %}"
+          >Notice</a
+        >
+      </li>
+      <li>
+        <a
+          href="{% url 'home:volunteer' %}"
+          class="mobile-nav-link {% if request.resolver_match.url_name == 'volunteer' %}active{% endif %}"
+          >Volunteer</a
+        >
+      </li>
+      <li>
+        <a
+          href="{% url 'home:contact' %}"
+          class="mobile-nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}"
+          >Contact</a
+        >
+      </li>
+    </ul>
+  </div>
+</header>
+{% endcomment %}
+
+<!-- ============================================
+     নেভিগেশন বার (ড্রপডাউন সহ)
+============================================= -->
+<header class="navbar" id="navbar">
+  <div class="container">
+    <div class="navbar-inner">
+      <a href="{% url 'home:index' %}" class="navbar-logo">
+        <span class="brand-mark">
+          <img src="{% if site_settings.logo %}{{ site_settings.logo.url }}{% else %}{% static 'icons/logo.jpg' %}{% endif %}" alt="Logo" width="50" />
+        </span>
+
+        <span class="logo-content">
+          <span class="logo-text">
+            {{ site_settings.site_name|default:'BRED' }}{% if not site_settings %}<span class="logo-accent">Club</span>{% endif %}
+          </span>
+          <span class="logo-tagline"> {{ site_settings.tagline|default:'Empowerment Through Development' }} </span>
+        </span>
+      </a>
+      
+      <nav class="nav-menu" id="navMenu">
+        <ul class="nav-list">
+          <li>
+            <a
+              href="{% url 'home:index' %}"
+              class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}"
+              >Home</a
+            >
+          </li>
+          <!-- About ড্রপডাউন -->
+          <li class="nav-dropdown">
+            <a
+              href="{% url 'home:about' %}"
+              class="nav-link {% if request.resolver_match.url_name == 'about' or request.resolver_match.url_name == 'board_members' or request.resolver_match.url_name == 'executive_committee' %}active{% endif %}"
+              >About
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <polyline points="6 9 12 15 18 9" /></svg
+            ></a>
+            <ul class="nav-dropdown-menu">
+              <li>
+                <a
+                  href="{% url 'home:about' %}"
+                  class="nav-dropdown-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="{% url 'home:board_members' %}"
+                  class="nav-dropdown-link {% if request.resolver_match.url_name == 'board_members' %}active{% endif %}"
+                  >Board of Members</a
+                >
+              </li>
+              <li>
+                <a
+                  href="{% url 'home:executive_committee' %}"
+                  class="nav-dropdown-link {% if request.resolver_match.url_name == 'executive_committee' %}active{% endif %}"
+                  >Executive Committee</a
+                >
+              </li>
+            </ul>
+          </li>
+          <!-- Activities ড্রপডাউন -->
+          <li class="nav-dropdown">
+            <a
+              href="{% url 'home:activities' %}"
+              class="nav-link {% if request.resolver_match.url_name == 'activities' or request.resolver_match.url_name == 'training' or request.resolver_match.url_name == 'events' or request.resolver_match.url_name == 'volunteer' %}active{% endif %}"
+              >Activities
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <polyline points="6 9 12 15 18 9" /></svg
+            ></a>
+            <ul class="nav-dropdown-menu">
+              <li>
+                <a
+                  href="{% url 'home:activities' %}"
+                  class="nav-dropdown-link {% if request.resolver_match.url_name == 'activities' %}active{% endif %}"
+                  >All Activities</a
+                >
+              </li>
+              <li>
+                <a
+                  href="{% url 'home:training' %}"
+                  class="nav-dropdown-link {% if request.resolver_match.url_name == 'training' %}active{% endif %}"
+                  >Training</a
+                >
+              </li>
+              <li>
+                <a
+                  href="{% url 'home:events' %}"
+                  class="nav-dropdown-link {% if request.resolver_match.url_name == 'events' %}active{% endif %}"
+                  >Events</a
+                >
+              </li>
+              <li>
+                <a
+                  href="{% url 'home:volunteer' %}"
+                  class="nav-dropdown-link {% if request.resolver_match.url_name == 'volunteer' %}active{% endif %}"
+                  >Volunteer</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a
+              href="{% url 'home:blog' %}"
+              class="nav-link {% if request.resolver_match.url_name == 'blog' %}active{% endif %}"
+              >Blog</a
+            >
+          </li>
+          <li>
+            <a
+              href="{% url 'home:gallery' %}"
+              class="nav-link {% if request.resolver_match.url_name == 'gallery' %}active{% endif %}"
+              >Gallery</a
+            >
+          </li>
+          <li>
+            <a
+              href="{% url 'home:notice' %}"
+              class="nav-link {% if request.resolver_match.url_name == 'notice' %}active{% endif %}"
+              >Notice</a
+            >
+          </li>
+          <li>
+            <a
+              href="{% url 'home:contact' %}"
+              class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}"
+              >Contact</a
+            >
+          </li>
+          <li>
+            <a
+              href="{% url 'home:ext' %}"
+              class="nav-link {% if request.resolver_match.url_name == 'ext' %}active{% endif %}"
+              >EXTRA</a
+            >
+          </li>
+        </ul>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </div>
+  <!-- মোবাইল মেনু (ড্রপডাউন সহ) -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul class="mobile-nav-list">
+      <li>
+        <a
+          href="{% url 'home:index' %}"
+          class="mobile-nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}"
+          >Home</a
+        >
+      </li>
+      <!-- About ড্রপডাউন -->
+      <li class="mobile-dropdown">
+        <a
+          href="{% url 'home:about' %}"
+          class="mobile-nav-link {% if request.resolver_match.url_name == 'about' or request.resolver_match.url_name == 'board_members' or request.resolver_match.url_name == 'executive_committee' %}active{% endif %}"
+          >About
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+          >
+            <polyline points="6 9 12 15 18 9" /></svg
+        ></a>
+        <ul class="mobile-dropdown-list">
+          <li>
+            <a
+              href="{% url 'home:about' %}"
+              class="mobile-nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}"
+              >About Us</a
+            >
+          </li>
+          <li>
+            <a
+              href="{% url 'home:board_members' %}"
+              class="mobile-nav-link {% if request.resolver_match.url_name == 'board_members' %}active{% endif %}"
+              >Board of Members</a
+            >
+          </li>
+          <li>
+            <a
+              href="{% url 'home:executive_committee' %}"
+              class="mobile-nav-link {% if request.resolver_match.url_name == 'executive_committee' %}active{% endif %}"
+              >Executive Committee</a
+            >
+          </li>
+        </ul>
+      </li>
+      <!-- Activities ড্রপডাউন -->
+      <li class="mobile-dropdown">
+        <a
+          href="{% url 'home:activities' %}"
+          class="mobile-nav-link {% if request.resolver_match.url_name == 'activities' or request.resolver_match.url_name == 'training' or request.resolver_match.url_name == 'events' or request.resolver_match.url_name == 'volunteer' %}active{% endif %}"
+          >Activities
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+          >
+            <polyline points="6 9 12 15 18 9" /></svg
+        ></a>
+        <ul class="mobile-dropdown-list">
+          <li>
+            <a
+              href="{% url 'home:activities' %}"
+              class="mobile-nav-link {% if request.resolver_match.url_name == 'activities' %}active{% endif %}"
+              >All Activities</a
+            >
+          </li>
+          <li>
+            <a
+              href="{% url 'home:training' %}"
+              class="mobile-nav-link {% if request.resolver_match.url_name == 'training' %}active{% endif %}"
+              >Training</a
+            >
+          </li>
+          <li>
+            <a
+              href="{% url 'home:events' %}"
+              class="mobile-nav-link {% if request.resolver_match.url_name == 'events' %}active{% endif %}"
+              >Events</a
+            >
+          </li>
+          <li>
+            <a
+              href="{% url 'home:volunteer' %}"
+              class="mobile-nav-link {% if request.resolver_match.url_name == 'volunteer' %}active{% endif %}"
+              >Volunteer</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a
+          href="{% url 'home:blog' %}"
+          class="mobile-nav-link {% if request.resolver_match.url_name == 'blog' %}active{% endif %}"
+          >Blog</a
+        >
+      </li>
+      <li>
+        <a
+          href="{% url 'home:gallery' %}"
+          class="mobile-nav-link {% if request.resolver_match.url_name == 'gallery' %}active{% endif %}"
+          >Gallery</a
+        >
+      </li>
+      <li>
+        <a
+          href="{% url 'home:notice' %}"
+          class="mobile-nav-link {% if request.resolver_match.url_name == 'notice' %}active{% endif %}"
+          >Notice</a
+        >
+      </li>
+      <li>
+        <a
+          href="{% url 'home:contact' %}"
+          class="mobile-nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}"
+          >Contact</a
+        >
+      </li>
+
+      <li>
+        <a
+          href="{% url 'home:ext' %}"
+          class="mobile-nav-link {% if request.resolver_match.url_name == 'ext' %}active{% endif %}"
+          >123</a
+        >
+      </li>
+    </ul>
+  </div>
+</header>

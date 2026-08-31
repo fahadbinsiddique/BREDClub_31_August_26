@@ -1,0 +1,59 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Dashboard Overview - BREDClub{% endblock %}
+{% block page_title %}Dashboard Overview{% endblock %}
+
+{% block content %}
+<section class="stat-grid">
+    {% for label, value in stats %}
+    <article class="stat-card">
+        <span>{{ label }}</span>
+        <strong>{{ value }}</strong>
+        <small>Live database count</small>
+    </article>
+    {% endfor %}
+</section>
+
+<section class="dashboard-grid">
+    <div class="panel panel-wide">
+        <div class="panel-heading">
+            <div>
+                <span class="panel-kicker">Website Activity</span>
+                <h2>Recent Updates</h2>
+            </div>
+            <a class="soft-btn" href="{% url 'dashboard:content' %}">Manage</a>
+        </div>
+        <div class="panel-note">
+            <strong>Site ready:</strong> the public pages, content management tools, forms, and starter content are all available for daily updates.
+        </div>
+        <div class="activity-list">
+            {% for item in recent_activity %}
+            <div class="activity-item">
+                <span class="dot success"></span>
+                <p>{{ item.label }}: {{ item.title }}</p>
+                <time>{{ item.updated_at|date:"M d, Y H:i" }}</time>
+            </div>
+            {% empty %}
+            <div class="empty-state">No recent activity yet.</div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-heading compact">
+            <div>
+                <span class="panel-kicker">Quick Actions</span>
+                <h2>Manage Site</h2>
+            </div>
+        </div>
+        <div class="quick-actions">
+            <a href="{% url 'dashboard:module_create' 'notices' %}">Create Notice</a>
+            <a href="{% url 'dashboard:module_create' 'events' %}">Create Event</a>
+            <a href="{% url 'dashboard:module_create' 'blogs' %}">Write Blog Post</a>
+            <a href="{% url 'dashboard:module_create' 'gallery-images' %}">Upload Gallery Photo</a>
+            <a href="{% url 'dashboard:messages' %}">Review Contact Messages</a>
+            <a href="{% url 'dashboard:settings' %}">Update Site Settings</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

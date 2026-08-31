@@ -1,0 +1,248 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ meta_title }}{% endblock %}
+
+{% block content %}
+<section class="hero-slider" id="heroSlider">
+    <div class="hero-slides-wrapper">
+        {% for slide in sliders %}
+        <div class="hero-slide {% if forloop.first %}active{% endif %}" data-slide="{{ forloop.counter0 }}">
+            <img src="{{ slide.image.url }}" alt="{{ slide.title }}" class="hero-bg-img" loading="eager" decoding="async">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                {% if slide.subtitle %}<span class="hero-subtitle fade-up">{{ slide.subtitle }}</span>{% endif %}
+                <h1 class="hero-title fade-up">{{ slide.title }}</h1>
+                {% if slide.description %}<p class="hero-desc fade-up">{{ slide.description }}</p>{% endif %}
+                <div class="hero-btns fade-up">
+                    {% if slide.primary_button_text and slide.primary_button_url %}<a href="{{ slide.primary_button_url }}" class="btn btn-primary">{{ slide.primary_button_text }}</a>{% endif %}
+                    {% if slide.secondary_button_text and slide.secondary_button_url %}<a href="{{ slide.secondary_button_url }}" class="btn btn-outline">{{ slide.secondary_button_text }}</a>{% endif %}
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="hero-slide active" data-slide="0">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <span class="hero-subtitle fade-up">Welcome to BREDClub</span>
+                <h1 class="hero-title fade-up">Building Resources for<br>Empowerment &amp; Development</h1>
+                <p class="hero-desc fade-up">Add homepage sliders from the dashboard to publish hero images and calls to action.</p>
+                <div class="hero-btns fade-up">
+                    <a href="{% url 'home:about' %}" class="btn btn-primary">About Us</a>
+                    <a href="{% url 'home:activities' %}" class="btn btn-outline">Our Activities</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% if sliders|length > 1 %}
+    <div class="hero-controls">
+        <button class="hero-prev" id="heroPrev" aria-label="Previous">‹</button>
+        <div class="hero-dots" id="heroDots">
+            {% for slide in sliders %}<span class="hero-dot {% if forloop.first %}active{% endif %}" data-dot="{{ forloop.counter0 }}"></span>{% endfor %}
+        </div>
+        <button class="hero-next" id="heroNext" aria-label="Next">›</button>
+    </div>
+    {% endif %}
+</section>
+
+<section class="section introduction">
+    <div class="container">
+        <div class="intro-grid">
+            {% if about and about.image %}
+            <div class="intro-image fade-in">
+                <div class="intro-img-wrapper">
+                    <img src="{{ about.image.url }}" alt="{{ about.title }}" class="intro-img" loading="lazy" decoding="async">
+                    {% if about.years_of_excellence %}<div class="intro-badge"><span class="badge-number">{{ about.years_of_excellence }}+</span><span class="badge-text">Years of<br>Excellence</span></div>{% endif %}
+                </div>
+            </div>
+            {% endif %}
+            <div class="intro-content fade-in">
+                <span class="section-tag">{{ about.subtitle|default:'About Us' }}</span>
+                <h2 class="section-title">{{ about.title|default:'Learn About BREDClub' }}</h2>
+                <div class="title-divider"></div>
+                {% if about %}
+                    {{ about.description|linebreaks }}
+                    {% if about.features %}
+                    <ul class="intro-features">
+                        {% for feature in about.features %}<li><span>{{ feature }}</span></li>{% endfor %}
+                    </ul>
+                    {% endif %}
+                {% else %}
+                    <p class="intro-text">Publish an About record from the dashboard to show organization details here.</p>
+                {% endif %}
+                <a href="{% url 'home:about' %}" class="btn btn-primary">Learn More</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% if organization %}
+<section class="counter-section">
+    <div class="counter-overlay"></div>
+    <div class="container">
+        <div class="counter-grid">
+            <div class="counter-item fade-in"><div class="counter-number" data-target="{{ organization.active_members }}">0</div><div class="counter-label">Active Members</div></div>
+            <div class="counter-item fade-in"><div class="counter-number" data-target="{{ organization.completed_projects }}">0</div><div class="counter-label">Completed Projects</div></div>
+            <div class="counter-item fade-in"><div class="counter-number" data-target="{{ organization.training_workshops }}">0</div><div class="counter-label">Training Workshops</div></div>
+            <div class="counter-item fade-in"><div class="counter-number" data-target="{{ organization.events_organized }}">0</div><div class="counter-label">Events Organized</div></div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<section class="section activities">
+    <div class="container">
+        <div class="section-header fade-in">
+            <span class="section-tag">What We Do</span>
+            <h2 class="section-title">Our Featured Activities</h2>
+            <div class="title-divider"></div>
+        </div>
+        <div class="activities-grid">
+            {% for activity in featured_activities|default:latest_activities %}
+            <div class="activity-card fade-in">
+                <h3 class="activity-title">{{ activity.title }}</h3>
+                <p class="activity-desc">{{ activity.short_description|default:activity.description|truncatewords:24 }}</p>
+                <a href="{% url 'home:activities' %}" class="activity-link">Details</a>
+            </div>
+            {% empty %}
+            <div class="empty-state">No activities have been published yet.</div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section training">
+    <div class="container">
+        <div class="section-header fade-in">
+            <span class="section-tag">Training Programs</span>
+            <h2 class="section-title">Our Training Programs</h2>
+            <div class="title-divider"></div>
+        </div>
+        <div class="training-grid">
+            {% for item in featured_trainings %}
+            <div class="training-card fade-in">
+                {% if item.image %}<div class="training-img-wrapper"><img src="{{ item.image.url }}" alt="{{ item.title }}" class="training-img" loading="lazy" decoding="async"><span class="training-badge {% if item.training_status == 'upcoming' %}upcoming{% endif %}">{{ item.get_training_status_display }}</span></div>{% endif %}
+                <div class="training-body">
+                    <div class="training-meta"><span>{{ item.duration|default:'Flexible' }}</span><span>{{ item.seats }} Seats</span></div>
+                    <h3 class="training-title">{{ item.title }}</h3>
+                    <p class="training-desc">{{ item.short_description|default:item.description|truncatewords:24 }}</p>
+                    {% if item.application_link %}<a href="{{ item.application_link }}" class="btn btn-sm btn-primary" target="_blank" rel="noopener">Apply Now</a>{% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <div class="empty-state">No training programs have been published yet.</div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section events">
+    <div class="container">
+        <div class="section-header fade-in">
+            <span class="section-tag">Upcoming Events</span>
+            <h2 class="section-title">Upcoming Events</h2>
+            <div class="title-divider"></div>
+        </div>
+        <div class="events-grid">
+            {% for event in upcoming_events %}
+            <div class="event-card fade-in">
+                <div class="event-date-box"><span class="event-day">{{ event.date|date:"d" }}</span><span class="event-month">{{ event.date|date:"M" }}</span><span class="event-year">{{ event.date|date:"Y" }}</span></div>
+                <div class="event-body">
+                    <h3 class="event-title">{{ event.title }}</h3>
+                    <p class="event-desc">{{ event.description|truncatewords:26 }}</p>
+                    <div class="event-meta"><span>{{ event.time|time:"g:i A"|default:'Time TBA' }}</span><span>{{ event.location }}</span></div>
+                    <a href="{{ event.get_absolute_url }}" class="event-link">View Details</a>
+                </div>
+            </div>
+            {% empty %}
+            <div class="empty-state">No upcoming events have been published yet.</div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section blogs">
+    <div class="container">
+        <div class="section-header fade-in">
+            <span class="section-tag">Latest Blog</span>
+            <h2 class="section-title">Latest Blog Posts</h2>
+            <div class="title-divider"></div>
+        </div>
+        <div class="blogs-grid">
+            {% for post in latest_blogs %}
+            <article class="blog-card fade-in">
+                {% if post.featured_image %}<div class="blog-img-wrapper"><img src="{{ post.featured_image.url }}" alt="{{ post.title }}" class="blog-img" loading="lazy" decoding="async">{% if post.category %}<span class="blog-category">{{ post.category.name }}</span>{% endif %}</div>{% endif %}
+                <div class="blog-body">
+                    <div class="blog-meta"><span>{{ post.published_at|date:"M d, Y" }}</span><span>{{ post.author|default:'BREDClub' }}</span></div>
+                    <h3 class="blog-title">{{ post.title }}</h3>
+                    <p class="blog-excerpt">{{ post.excerpt|default:post.content|truncatewords:24 }}</p>
+                    <a href="{{ post.get_absolute_url }}" class="blog-link">Read More</a>
+                </div>
+            </article>
+            {% empty %}
+            <div class="empty-state">No blog posts have been published yet.</div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section gallery">
+    <div class="container">
+        <div class="section-header fade-in">
+            <span class="section-tag">Photo Gallery</span>
+            <h2 class="section-title">Our Photo Gallery</h2>
+            <div class="title-divider"></div>
+        </div>
+        <div class="gallery-grid">
+            {% for photo in gallery_images %}
+            <a class="gallery-item fade-in" href="{{ photo.image.url }}" target="_blank" rel="noopener">
+                <img src="{{ photo.image.url }}" alt="{{ photo.title }}" class="gallery-img" loading="lazy" decoding="async">
+                <div class="gallery-overlay"><div class="gallery-overlay-content"><span>{{ photo.title }}</span></div></div>
+            </a>
+            {% empty %}
+            <div class="empty-state">No gallery images have been published yet.</div>
+            {% endfor %}
+        </div>
+        <div style="text-align:center;margin-top:30px;" class="fade-in"><a href="{% url 'home:gallery' %}" class="btn btn-primary">View All Photos</a></div>
+    </div>
+</section>
+
+<section class="section notice">
+    <div class="container">
+        <div class="section-header fade-in">
+            <span class="section-tag">Notice Board</span>
+            <h2 class="section-title">Notice Board</h2>
+            <div class="title-divider"></div>
+        </div>
+        <div class="notice-list fade-in">
+            {% for item in latest_notices %}
+            <div class="notice-item">
+                <div class="notice-date"><span class="notice-day">{{ item.published_date|date:"d" }}</span><span class="notice-month">{{ item.published_date|date:"M" }}</span></div>
+                <div class="notice-content">
+                    <h4 class="notice-title">{{ item.title }}</h4>
+                    <p class="notice-excerpt">{{ item.summary|default:item.content|truncatewords:26 }}</p>
+                    <a href="{{ item.get_absolute_url }}" class="notice-link">Details</a>
+                </div>
+            </div>
+            {% empty %}
+            <div class="empty-state">No notices have been published yet.</div>
+            {% endfor %}
+        </div>
+        <div style="text-align:center;margin-top:30px;" class="fade-in"><a href="{% url 'home:notice' %}" class="btn btn-primary">View All Notices</a></div>
+    </div>
+</section>
+
+<section class="section volunteer">
+    <div class="container">
+        <div class="volunteer-grid">
+            <div class="volunteer-content fade-in">
+                <span class="section-tag">Be a Volunteer</span>
+                <h2 class="section-title">Want to Become a Volunteer?</h2>
+                <div class="title-divider"></div>
+                <p class="volunteer-desc">Join BREDClub as a volunteer and contribute to community development.</p>
+                <a href="{% url 'home:volunteer' %}" class="btn btn-primary">Apply Now</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

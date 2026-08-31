@@ -1,0 +1,21 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Delete {{ object }} - Dashboard{% endblock %}
+{% block page_title %}Delete {{ module.title }}{% endblock %}
+
+{% block content %}
+<section class="panel form-panel">
+    <div class="panel-heading compact">
+        <div>
+            <span class="panel-kicker">Confirm Delete</span>
+            <h2>{{ object }}</h2>
+        </div>
+    </div>
+    <p class="delete-warning">This action permanently deletes the selected record.</p>
+    <form method="post" class="form-actions">
+        {% csrf_token %}
+        <button type="submit" class="primary-btn danger-bg">Delete</button>
+        <a class="soft-btn" href="{% url 'dashboard:module_detail' module.slug object.pk %}">Cancel</a>
+    </form>
+</section>
+{% endblock %}

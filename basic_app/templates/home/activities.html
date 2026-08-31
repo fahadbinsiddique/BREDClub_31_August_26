@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ meta_title }}{% endblock %}
+
+{% block content %}
+<section class="page-banner">
+    <div class="page-banner-overlay"></div>
+    <div class="page-banner-content">
+        <h1 class="page-banner-title">Our Activities</h1>
+        <nav class="breadcrumb"><a href="{% url 'home:index' %}">Home</a><span>/</span><span>Activities</span></nav>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="section-header fade-in">
+            <span class="section-tag">What We Do</span>
+            <h2 class="section-title">All Our Activities</h2>
+            <div class="title-divider"></div>
+        </div>
+        <div class="activities-full-grid">
+            {% for activity in activities %}
+            <div class="activity-full-card fade-in {% cycle '' 'reverse' %}">
+                {% if activity.image %}<div class="activity-full-img"><img src="{{ activity.image.url }}" alt="{{ activity.title }}" loading="lazy" decoding="async"></div>{% endif %}
+                <div class="activity-full-body">
+                    <h3 class="activity-full-title">{{ activity.title }}</h3>
+                    <p class="activity-full-desc">{{ activity.description }}</p>
+                    {% if activity.highlight_list %}
+                    <ul class="activity-full-list">
+                        {% for highlight in activity.highlight_list %}<li>{{ highlight }}</li>{% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <div class="empty-state">No activities have been published yet.</div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

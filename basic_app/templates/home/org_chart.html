@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Organization Chart</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://jsdelivr.net" rel="stylesheet">
+    <!-- External custom CSS overrides for tree layout -->
+    <link rel="stylesheet" href="{% static 'css/org_chart.css' %}">
+</head>
+<body class="bg-light py-5">
+
+    <div class="container-fluid">
+        <!-- 1. Top Executive Stack -->
+        <div class="d-flex flex-column align-items-center mb-4">
+            
+            <!-- Board of Directors Card -->
+            {% if board %}
+                {% include "partials/employee_card.html" with emp=board %}
+                <div class="tree-line-vertical"></div>
+            {% endif %}
+
+            <!-- Founder Card -->
+            {% if founder %}
+                {% include "partials/employee_card.html" with emp=founder %}
+                <div class="tree-line-vertical"></div>
+            {% endif %}
+
+            <!-- Co-Founder Card -->
+            {% if co_founder %}
+                {% include "partials/employee_card.html" with emp=co_founder %}
+            {% endif %}
+
+        </div>
+
+        <!-- Structural Divider Line matching the original split -->
+        <div class="row position-relative my-4">
+            <div class="col-12 px-5">
+                <div class="tree-line-horizontal"></div>
+            </div>
+        </div>
+
+        <!-- 2. Department Branches Row -->
+        <div class="row row-cols-1 row-cols-md-3 g-4 px-4 text-center justify-content-center">
+            
+            {% for director in directors %}
+                <div class="col d-flex flex-column align-items-center">
+                    <div class="tree-line-vertical-short"></div>
+                    
+                    <!-- Director Card -->
+                    {% include "partials/employee_card.html" with emp=director %}
+                    
+                    <!-- Direct Child Reporting Loop (Subordinates) -->
+                    {% if director.subordinates.all %}
+                        <div class="tree-line-vertical"></div>
+                        <div class="d-flex flex-wrap justify-content-center gap-3 w-100">
+                            {% for staff in director.subordinates.all %}
+                                <div class="d-flex flex-column align-items-center">
+                                    {% include "partials/employee_card.html" with emp=staff %}
+                                    
+                                    <!-- Deeper nested children (e.g., Coordinator to Assistant level) -->
+                                    {% if staff.subordinates.all %}
+                                        <div class="tree-line-vertical"></div>
+                                        {% for nested_staff in staff.subordinates.all %}
+                                            {% include "partials/employee_card.html" with emp=nested_staff %}
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+    <!-- External JavaScript File -->
+    <script src="{% static 'js/org_chart.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ meta_title }}{% endblock %}
+
+{% block content %}
+<section class="page-banner">
+    <div class="page-banner-overlay"></div>
+    <div class="page-banner-content">
+        <h1 class="page-banner-title">Board of Members</h1>
+        <nav class="breadcrumb"><a href="{% url 'home:index' %}">Home</a><span>/</span><span>Board of Members</span></nav>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="section-header fade-in">
+            <span class="section-tag">Our Leadership</span>
+            <h2 class="section-title">Board of Members</h2>
+            <div class="title-divider"></div>
+        </div>
+        <form class="site-search" method="get">
+            <input type="search" name="q" value="{{ query }}" placeholder="Search board members">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+        <div class="team-grid">
+            {% for member in members %}
+            <div class="team-card fade-in">
+                {% if member.photo %}<div class="team-img-wrap"><img src="{{ member.photo.url }}" alt="{{ member.name }}" class="team-img" loading="lazy" decoding="async"></div>{% endif %}
+                <div class="team-info">
+                    <h3 class="team-name">{{ member.name }}</h3>
+                    <span class="team-role">{{ member.designation }}</span>
+                    <p class="team-bio">{{ member.biography }}</p>
+                    <div class="team-social">
+                        {% if member.linkedin_url %}<a href="{{ member.linkedin_url }}" target="_blank" rel="noopener">in</a>{% endif %}
+                        {% if member.facebook_url %}<a href="{{ member.facebook_url }}" target="_blank" rel="noopener">f</a>{% endif %}
+                        {% if member.twitter_url %}<a href="{{ member.twitter_url }}" target="_blank" rel="noopener">x</a>{% endif %}
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="empty-state">No board members found.</div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

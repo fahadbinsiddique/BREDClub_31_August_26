@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Login - BREDClub</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body class="auth-body">
+    <main class="auth-card">
+        <a href="{% url 'home:index' %}" class="dashboard-brand auth-brand">
+            <span class="banner-logo">
+                <img src="{% static 'icons/logo.jpg' %}" alt="Logo" width="50">
+            </span>
+            <span>
+                <strong class="banner-brand">BRED<span>Club</span></strong>
+                <small>Admin Dashboard</small>
+            </span>
+        </a>
+        <h1>Sign in</h1>
+        <p>Use your Django staff or superuser account.</p>
+        {% if messages %}
+        <div class="dashboard-alerts">
+            {% for message in messages %}
+                <div class="dashboard-alert {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <form method="post" class="dashboard-form" novalidate>
+            {% csrf_token %}
+            {% for field in form %}
+                <label>
+                    {{ field.label }}
+                    {{ field }}
+                    {% for error in field.errors %}<small class="form-error">{{ error }}</small>{% endfor %}
+                </label>
+            {% endfor %}
+            {% for error in form.non_field_errors %}<small class="form-error">{{ error }}</small>{% endfor %}
+            <button type="submit" class="primary-btn">Login</button>
+        </form>
+    </main>
+</body>
+</html>

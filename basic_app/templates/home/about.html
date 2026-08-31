@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ meta_title }}{% endblock %}
+
+{% block content %}
+<section class="page-banner">
+    <div class="page-banner-overlay"></div>
+    <div class="page-banner-content">
+        <h1 class="page-banner-title">About Us</h1>
+        <nav class="breadcrumb"><a href="{% url 'home:index' %}">Home</a><span>/</span><span>About Us</span></nav>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="intro-grid">
+            {% if about and about.image %}
+            <div class="intro-image fade-in">
+                <div class="intro-img-wrapper">
+                    <img src="{{ about.image.url }}" alt="{{ about.title }}" class="intro-img" loading="lazy" decoding="async">
+                    {% if about.years_of_excellence %}<div class="intro-badge"><span class="badge-number">{{ about.years_of_excellence }}+</span><span class="badge-text">Years of<br>Excellence</span></div>{% endif %}
+                </div>
+            </div>
+            {% endif %}
+            <div class="intro-content fade-in">
+                <span class="section-tag">{{ about.subtitle|default:'Who We Are' }}</span>
+                <h2 class="section-title">{{ about.title|default:'About BREDClub' }}</h2>
+                <div class="title-divider" style="margin-left:0"></div>
+                {% if about %}
+                    {{ about.description|linebreaks }}
+                    {% if about.features %}
+                    <ul class="intro-features">
+                        {% for feature in about.features %}<li><span>{{ feature }}</span></li>{% endfor %}
+                    </ul>
+                    {% endif %}
+                {% else %}
+                    <p class="intro-text">No about content has been published yet.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" style="background:var(--bg-section-alt)">
+    <div class="container">
+        <div class="vm-grid">
+            {% for item in visions %}
+            <div class="vm-card fade-in">
+                <h3 class="vm-title">{{ item.title }}</h3>
+                <p class="vm-text">{{ item.description }}</p>
+            </div>
+            {% endfor %}
+            {% for item in missions %}
+            <div class="vm-card fade-in">
+                <h3 class="vm-title">{{ item.title }}</h3>
+                <p class="vm-text">{{ item.description }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% if organization %}
+<section class="counter-section">
+    <div class="counter-overlay"></div>
+    <div class="container">
+        <div class="counter-grid">
+            <div class="counter-item fade-in"><div class="counter-number" data-target="{{ organization.active_members }}">0</div><div class="counter-label">Active Members</div></div>
+            <div class="counter-item fade-in"><div class="counter-number" data-target="{{ organization.completed_projects }}">0</div><div class="counter-label">Completed Projects</div></div>
+            <div class="counter-item fade-in"><div class="counter-number" data-target="{{ organization.training_workshops }}">0</div><div class="counter-label">Training Workshops</div></div>
+            <div class="counter-item fade-in"><div class="counter-number" data-target="{{ organization.events_organized }}">0</div><div class="counter-label">Events Organized</div></div>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

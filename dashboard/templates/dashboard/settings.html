@@ -1,0 +1,47 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Dashboard Settings - BREDClub{% endblock %}
+{% block page_title %}Site Settings{% endblock %}
+
+{% block content %}
+<section class="settings-grid">
+    <div class="panel">
+        <div class="panel-heading compact">
+            <div>
+                <span class="panel-kicker">Organization</span>
+                <h2>Basic Information</h2>
+            </div>
+        </div>
+        <form class="dashboard-form" method="post" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+            {% for field in form %}
+                <label>
+                    {{ field.label }}
+                    {{ field }}
+                    {% for error in field.errors %}<small class="form-error">{{ error }}</small>{% endfor %}
+                </label>
+            {% endfor %}
+            <button type="submit" class="primary-btn">Save Changes</button>
+        </form>
+    </div>
+
+    <div class="panel">
+        <div class="panel-heading compact">
+            <div>
+                <span class="panel-kicker">Access</span>
+                <h2>Admin Roles</h2>
+            </div>
+        </div>
+        <div class="role-list">
+            <div><span>Super Admin</span><strong>Full access</strong></div>
+            <div><span>Staff</span><strong>Dashboard access</strong></div>
+            <div><span>Public User</span><strong>No dashboard access</strong></div>
+        </div>
+        <div class="quick-actions settings-actions">
+            {% for module in modules %}
+                <a href="{% url 'dashboard:module_list' module.slug %}">{{ module.title }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

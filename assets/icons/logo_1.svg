@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="700"
+     height="700"
+     viewBox="0 0 600 600">
+
+    <defs>
+        <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#0B5ED7"/>
+            <stop offset="100%" stop-color="#198754"/>
+        </linearGradient>
+    </defs>
+
+    <!-- Outer Circle -->
+    <circle cx="300" cy="300" r="250"
+            fill="white"
+            stroke="url(#grad)"
+            stroke-width="12"/>
+
+    <!-- Book -->
+    <path d="M210 355
+             Q300 305 390 355
+             L390 390
+             Q300 340 210 390 Z"
+          fill="#0B5ED7"/>
+
+    <line x1="300" y1="310" x2="300" y2="390"
+          stroke="white"
+          stroke-width="4"/>
+
+    <!-- Stem -->
+    <rect x="292" y="175" width="16" height="145"
+          rx="8"
+          fill="#198754"/>
+
+    <!-- Leaves -->
+    <path d="M300 235
+             C240 225 215 170 245 130
+             C285 145 310 185 300 235"
+          fill="#198754"/>
+
+    <path d="M300 235
+             C360 225 385 170 355 130
+             C315 145 290 185 300 235"
+          fill="#198754"/>
+
+    <!-- Human Figures -->
+    <circle cx="245" cy="275" r="15" fill="#F59E0B"/>
+    <circle cx="355" cy="275" r="15" fill="#F59E0B"/>
+    <circle cx="300" cy="255" r="18" fill="#0B5ED7"/>
+
+    <path d="M225 315
+             Q245 290 265 315
+             L265 340
+             L225 340 Z"
+          fill="#F59E0B"/>
+
+    <path d="M335 315
+             Q355 290 375 315
+             L375 340
+             L335 340 Z"
+          fill="#F59E0B"/>
+
+    <path d="M275 305
+             Q300 270 325 305
+             L325 345
+             L275 345 Z"
+          fill="#0B5ED7"/>
+
+    <!-- Organization Name -->
+    <text x="300"
+          y="465"
+          text-anchor="middle"
+          font-size="42"
+          font-family="Segoe UI, Arial, sans-serif"
+          font-weight="700"
+          fill="#0B5ED7">
+        BREDClub
+    </text>
+</svg>

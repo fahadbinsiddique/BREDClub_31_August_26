@@ -1,0 +1,32 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Content Manager - BREDClub{% endblock %}
+{% block page_title %}Content Manager{% endblock %}
+
+{% block content %}
+<section class="panel">
+    <div class="panel-heading">
+        <div>
+            <span class="panel-kicker">Database Modules</span>
+            <h2>Website Sections</h2>
+        </div>
+        <a class="primary-btn" href="{% url 'dashboard:module_create' 'notices' %}">Create Notice</a>
+    </div>
+
+    <div class="module-grid">
+        {% for module in modules %}
+        <article class="module-card">
+            <div>
+                <span class="panel-kicker">{{ module.count }} Records</span>
+                <h3>{{ module.title }}</h3>
+                <p>{{ module.description }}</p>
+            </div>
+            <div class="module-actions">
+                <a class="soft-btn" href="{% url 'dashboard:module_list' module.slug %}">Manage</a>
+                <a class="primary-btn" href="{% url 'dashboard:module_create' module.slug %}">Create</a>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

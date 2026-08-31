@@ -1,0 +1,29 @@
+<div class="card shadow-sm border-0 org-card transition-hover mx-auto" style="width: 16rem;" data-emp-id="{{ emp.id }}">
+    {% if emp.photo %}
+        <img src="{{ emp.photo.url }}" class="card-img-top org-avatar mx-auto mt-3 rounded-circle" alt="{{ emp.name }}">
+    {% else %}
+        <!-- Fallback placeholder avatar -->
+        <div class="org-avatar mx-auto mt-3 rounded-circle bg-secondary d-flex align-items-center justify-content-center text-white">
+            <span class="fs-4">{{ emp.name|slice:":1" }}</span>
+        </div>
+    {% endif %}
+    
+    <div class="card-body text-center d-flex flex-column justify-content-between">
+        <div>
+            <h5 class="card-title mb-1 text-dark text-truncate">{{ emp.name }}</h5>
+            <p class="card-text text-muted small mb-2">{{ emp.designation }}</p>
+            {% if emp.department %}
+                <span class="badge bg-primary-subtle text-primary border border-primary-subtle mb-3">
+                    {{ emp.department }}
+                </span>
+            {% endif %}
+        </div>
+        
+        <div class="mt-2">
+            {% if emp.profile_url %}
+                <a href="{{ emp.profile_url }}" class="btn btn-outline-dark btn-sm w-100 rounded-pill mb-1">View Profile</a>
+            {% endif %}
+            <button class="btn btn-light btn-sm text-muted w-100 border rounded-pill connect-btn">Contact</button>
+        </div>
+    </div>
+</div>

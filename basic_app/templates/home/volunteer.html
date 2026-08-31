@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ meta_title }}{% endblock %}
+
+{% block content %}
+<section class="page-banner">
+    <div class="page-banner-overlay"></div>
+    <div class="page-banner-content">
+        <h1 class="page-banner-title">Become a Volunteer</h1>
+        <nav class="breadcrumb"><a href="{% url 'home:index' %}">Home</a><span>/</span><span>Volunteer</span></nav>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="intro-grid">
+            <div class="intro-content fade-in">
+                <span class="section-tag">Join Our Team</span>
+                <h2 class="section-title">Why Volunteer With BREDClub?</h2>
+                <div class="title-divider" style="margin-left:0"></div>
+                <p class="intro-text">Volunteering with BREDClub is an opportunity for personal growth, skill development, and meaningful community service.</p>
+                <ul class="intro-features">
+                    <li><span>Gain valuable social service experience</span></li>
+                    <li><span>Learn new skills through hands-on work</span></li>
+                    <li><span>Build your professional network</span></li>
+                    <li><span>Contribute to sustainable community development</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" style="background:var(--bg-section-alt)">
+    <div class="container">
+        <div class="section-header fade-in">
+            <span class="section-tag">Apply Now</span>
+            <h2 class="section-title">Volunteer Registration Form</h2>
+            <div class="title-divider"></div>
+        </div>
+        <div class="form-container fade-in">
+            <p class="form-helper-text">Tell us a little about yourself and the area you would like to support so we can match you with the right opportunity.</p>
+            <form class="volunteer-form" method="post" id="volunteerForm" novalidate>
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="{{ form.name.id_for_label }}">Full Name *</label>
+                        {{ form.name }}
+                        {% for error in form.name.errors %}<p class="form-msg error">{{ error }}</p>{% endfor %}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.email.id_for_label }}">Email Address *</label>
+                        {{ form.email }}
+                        {% for error in form.email.errors %}<p class="form-msg error">{{ error }}</p>{% endfor %}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="{{ form.phone.id_for_label }}">Phone Number *</label>
+                        {{ form.phone }}
+                        {% for error in form.phone.errors %}<p class="form-msg error">{{ error }}</p>{% endfor %}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.area.id_for_label }}">Area of Interest *</label>
+                        {{ form.area }}
+                        {% for error in form.area.errors %}<p class="form-msg error">{{ error }}</p>{% endfor %}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.message.id_for_label }}">Why do you want to volunteer?</label>
+                    {{ form.message }}
+                    {% for error in form.message.errors %}<p class="form-msg error">{{ error }}</p>{% endfor %}
+                </div>
+                {% for error in form.non_field_errors %}<p class="form-msg error">{{ error }}</p>{% endfor %}
+                <button type="submit" class="btn btn-primary">Submit Application</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
