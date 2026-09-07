@@ -10,6 +10,7 @@
     .intro-img{height:360px}
     .volunteer-grid{gap:40px}
     .footer-grid{gap:30px}
+    .committee-grid{gap:40px 32px}
     .contact-cards{grid-template-columns:repeat(2,1fr)}
 }
 
@@ -28,10 +29,19 @@
     .intro-content .section-title,.volunteer-content .section-title{text-align:center}
     .intro-content .title-divider,.volunteer-content .title-divider{margin:0 auto 20px}
     .intro-badge{bottom:-10px;right:20px}
-    .counter-grid,.activities-grid,.training-grid,.events-grid,.blogs-grid,.success-grid,.gallery-grid,.team-grid{grid-template-columns:repeat(2,1fr)}
+    .counter-grid,.activities-grid,.training-grid,.events-grid,.blogs-grid,.success-grid,.gallery-grid,.team-grid,.committee-grid{grid-template-columns:repeat(2,1fr)}
+    .committee-hero-title{font-size:32px}
+    .committee-hero-desc{font-size:15px}
+    .committee-hero{margin-bottom:48px}
+    .president-card{padding:20px}
+    .president-info{padding:32px 28px}
+    .president-name{font-size:28px}
+    .committee-avatar{width:240px;height:240px}
+    .committee-grid{gap:36px 28px}
     .activity-full-card{grid-template-columns:1fr}
     .activity-full-card.reverse{direction:ltr}
     .footer-grid{grid-template-columns:repeat(2,1fr);gap:30px}
+    .footer-social-btns{flex-direction:row;flex-wrap:wrap;gap:8px}
 }
 
 /* মোবাইল ল্যান্ডস্কেপ */
@@ -55,7 +65,18 @@
     .badge-number{font-size:28px}
     .counter-number{font-size:34px}
     .counter-section{padding:50px 0}
-    .activities-grid,.training-grid,.events-grid,.blogs-grid,.success-grid,.gallery-grid,.team-grid,.vm-grid,.contact-cards{grid-template-columns:1fr}
+    .activities-grid,.training-grid,.events-grid,.blogs-grid,.success-grid,.gallery-grid,.team-grid,.committee-grid,.vm-grid,.contact-cards{grid-template-columns:1fr}
+    .committee-avatar{width:220px;height:220px}
+    .committee-hero-title{font-size:28px}
+    .committee-hero-desc{font-size:14px}
+    .committee-hero{margin-bottom:40px}
+    .president-card{border-radius:14px;padding:18px}
+    .president-portrait{flex:none;max-width:100%;min-height:280px;border-radius:10px}
+    .president-info{padding:28px 22px}
+    .president-name{font-size:24px}
+    .president-quote{padding:18px 20px;font-size:14px}
+    .committee-section-heading{margin-bottom:36px}
+    .committee-grid{gap:32px 24px}
     .gallery-item{height:220px}
     .event-card{flex-direction:column}
     .event-date-box{width:100%;flex-direction:row;gap:10px;padding:14px 20px}
@@ -71,7 +92,10 @@
     .newsletter-btn{padding:14px}
     .social-card{width:120px;padding:20px 16px}
     .footer-grid{grid-template-columns:1fr;gap:30px}
-    .footer-bottom{flex-direction:column;gap:6px;text-align:center}
+    .footer-bottom{flex-direction:column;gap:10px;text-align:center}
+    .footer-legal{flex-wrap:wrap;justify-content:center;gap:14px}
+    .footer-social-btns{flex-direction:row;flex-wrap:wrap;gap:8px}
+    .footer-social-btn{width:auto;padding:8px 14px;font-size:13px}
     .scroll-top{bottom:20px;right:20px;width:42px;height:42px}
     .page-banner{height:220px}
     .page-banner-title{font-size:30px}
@@ -101,4 +125,12 @@
     .social-card{width:72px;padding:16px 10px;font-size:10px}
     .social-card svg{width:22px;height:22px}
     .team-img-wrap{height:220px}
+    .committee-avatar{width:200px;height:200px}
+    .committee-hero-title{font-size:24px}
+    .committee-hero{margin-bottom:32px}
+    .president-card{padding:14px}
+    .president-portrait{min-height:240px;border-radius:8px}
+    .president-info{padding:22px 18px}
+    .president-name{font-size:20px}
+    .committee-watermark{font-size:8px;letter-spacing:2px;bottom:10px}
 }

@@ -2075,6 +2075,269 @@ textarea {
     color: var(--white)
 }
 
+/* ═══════════════════════════════════════════
+   COMMITTEE MEMBERS — Premium NGO Corporate
+   ═══════════════════════════════════════════ */
+
+/* ── Hero Section ── */
+.committee-hero {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px;
+}
+
+.committee-hero-title {
+    font-family: var(--font-heading);
+    font-size: 40px;
+    font-weight: 800;
+    color: var(--gray-900);
+    line-height: 1.2;
+    margin-bottom: 0;
+}
+
+.committee-hero-line {
+    width: 60px;
+    height: 3px;
+    background: #087A3E;
+    margin: 18px auto 20px;
+    border-radius: 2px;
+}
+
+.committee-hero-desc {
+    font-size: 16px;
+    color: #6B7280;
+    line-height: 1.8;
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+/* ── President Feature Card ── */
+.president-card {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto 70px;
+    background: #FFFFFF;
+    border: 1.5px solid #087A3E;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 24px rgba(8, 122, 62, 0.08);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.president-card:hover {
+    box-shadow: 0 12px 40px rgba(8, 122, 62, 0.14);
+    transform: translateY(-2px);
+}
+
+.president-card-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+@media (min-width: 768px) {
+    .president-card-inner {
+        flex-direction: row;
+        align-items: stretch;
+        gap: 0;
+    }
+}
+
+.president-portrait {
+    position: relative;
+    flex: 0 0 38%;
+    max-width: 38%;
+    background: #087A3E;
+    border-radius: 12px;
+    overflow: hidden;
+    min-height: 340px;
+}
+
+@media (min-width: 768px) {
+    .president-portrait {
+        border-radius: 12px;
+    }
+}
+
+.president-portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+}
+
+.president-info {
+    flex: 1;
+    padding: 38px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.president-name {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 800;
+    color: #1F2933;
+    margin-bottom: 14px;
+    line-height: 1.25;
+    letter-spacing: -0.3px;
+}
+
+@media (min-width: 768px) {
+    .president-name {
+        font-size: 32px;
+    }
+}
+
+.president-badge {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.8px;
+    color: #FFFFFF;
+    background: #087A3E;
+    padding: 8px 22px;
+    border-radius: 9999px;
+    margin-bottom: 24px;
+    width: fit-content;
+}
+
+.president-divider {
+    border: none;
+    border-top: 1px solid #DDE5DF;
+    margin: 0 0 24px;
+}
+
+.president-quote {
+    background: #EAF5EC;
+    border-left: 4px solid #087A3E;
+    padding: 24px 28px;
+    border-radius: 0 10px 10px 0;
+    margin: 0;
+    font-style: italic;
+    color: #4a5568;
+    line-height: 1.85;
+    font-size: 15px;
+}
+
+.president-quote p {
+    margin: 0;
+}
+
+/* ── Section Heading Between Cards ── */
+.committee-section-heading {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.committee-section-heading .committee-hero-line {
+    margin-bottom: 0;
+}
+
+/* ── Member Grid ── */
+.committee-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 44px 36px;
+    padding: 10px 0;
+}
+
+/* ── Standard Member Card ── */
+.committee-card {
+    text-align: center;
+    padding: 10px 12px;
+    border-radius: 16px;
+    background: transparent;
+    transition: transform 0.3s ease;
+}
+
+.committee-card:hover {
+    transform: translateY(-6px);
+}
+
+/* ── Avatar Circle ── */
+.committee-avatar {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background: #155D38;
+    overflow: hidden;
+    box-shadow: 0 8px 28px rgba(8, 122, 62, 0.25);
+    transition: box-shadow 0.3s ease;
+}
+
+.committee-card:hover .committee-avatar {
+    box-shadow: 0 12px 36px rgba(8, 122, 62, 0.35);
+}
+
+.committee-avatar img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transform: scale(1.08);
+    z-index: 10;
+    transition: transform 0.5s ease;
+}
+
+.committee-card:hover .committee-avatar img {
+    transform: scale(1.12);
+}
+
+.committee-wave {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 38%;
+    z-index: 20;
+    pointer-events: none;
+}
+
+.committee-watermark {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-heading);
+    font-size: 9px;
+    font-weight: 800;
+    color: #FFFFFF;
+    letter-spacing: 3px;
+    z-index: 30;
+    pointer-events: none;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+}
+
+.committee-name {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    font-weight: 700;
+    color: #1F2933;
+    margin-bottom: 5px;
+    line-height: 1.35;
+}
+
+.committee-role {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #087A3E;
+    line-height: 1.4;
+}
+
 /* ------------------------------------------
    ২৩. ফর্ম স্টাইল (Volunteer & Contact)
    ------------------------------------------ */
@@ -2271,11 +2534,11 @@ textarea {
 }
 
 /* ------------------------------------------
-   ২৬. ফুটার
+   ২৬. ফুটার — Dark Green Corporate
    ------------------------------------------ */
 .footer {
-    background: var(--dark);
-    color: var(--gray-400);
+    background: #176B42;
+    color: rgba(255, 255, 255, 0.7);
     padding: 70px 0 0
 }
 
@@ -2284,44 +2547,44 @@ textarea {
     grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
     gap: 40px;
     padding-bottom: 40px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08)
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12)
 }
 
 .footer-logo .logo-text {
     color: var(--white);
-    /* font-size: 24px; */
     font-size: 30px
 }
 
 .footer-about {
-    /* font-size: 14px; */
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.8;
     margin: 16px 0 20px;
-    color: var(--gray-500)
+    color: rgba(255, 255, 255, 0.65)
 }
 
-.footer-social {
-    display: flex;
-    gap: 10px
+.footer-payment-label {
+    font-family: var(--font-heading);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 10px;
 }
 
-.footer-social a {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.06);
-    color: var(--gray-500);
+.footer-payment-area {
     display: flex;
     align-items: center;
-    justify-content: center;
-    transition: var(--transition)
+    gap: 12px;
 }
 
-.footer-social a:hover {
-    background: var(--primary);
-    color: var(--white);
-    transform: translateY(-2px)
+.footer-payment-placeholder {
+    display: inline-block;
+    padding: 8px 18px;
+    border: 1px dashed rgba(255, 255, 255, 0.25);
+    border-radius: 8px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.45);
 }
 
 .footer-heading {
@@ -2329,7 +2592,7 @@ textarea {
     font-size: 16px;
     font-weight: 600;
     color: var(--white);
-    margin-bottom: 22px;
+    margin-bottom: 20px;
     position: relative;
     padding-bottom: 10px
 }
@@ -2341,7 +2604,7 @@ textarea {
     left: 0;
     width: 30px;
     height: 2px;
-    background: var(--primary);
+    background: #FF9418;
     border-radius: 2px
 }
 
@@ -2350,16 +2613,15 @@ textarea {
 }
 
 .footer-links a {
-    /* font-size: 14px; */
-    font-size: 16px;
-    font-weight: 400; /* added */
-    color: var(--gray-500);
+    font-size: 15px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.6);
     transition: var(--transition);
     display: inline-block
 }
 
 .footer-links a:hover {
-    color: var(--secondary-light);
+    color: var(--white);
     transform: translateX(4px)
 }
 
@@ -2367,25 +2629,72 @@ textarea {
     display: flex;
     gap: 12px;
     margin-bottom: 16px;
-    /* font-size: 14px; */
-    font-size: 16px;
-    color: var(--gray-500);
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.6);
     line-height: 1.6
 }
 
 .footer-contact li svg {
     flex-shrink: 0;
-    color: var(--primary-light);
+    color: #FF9418;
     margin-top: 3px
+}
+
+.footer-social-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-social-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 14px;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.footer-social-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--white);
+    transform: translateX(4px);
+}
+
+.footer-social-btn svg {
+    flex-shrink: 0;
 }
 
 .footer-bottom {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 0;
+    padding: 22px 0;
     font-size: 13px;
-    color: var(--gray-600)
+    color: rgba(255, 255, 255, 0.45)
+}
+
+.footer-copyright {
+    margin: 0;
+}
+
+.footer-legal {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-legal a {
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 13px;
+    transition: var(--transition);
+}
+
+.footer-legal a:hover {
+    color: var(--white);
 }
 
 /* ------------------------------------------

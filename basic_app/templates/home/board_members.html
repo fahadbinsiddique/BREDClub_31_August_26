@@ -7,40 +7,84 @@
     <div class="page-banner-overlay"></div>
     <div class="page-banner-content">
         <h1 class="page-banner-title">Board of Members</h1>
-        <nav class="breadcrumb"><a href="{% url 'home:index' %}">Home</a><span>/</span><span>Board of Members</span></nav>
+        <nav class="breadcrumb">
+            <a href="{% url 'home:index' %}">Home</a><span>/</span><span>Board of Members</span>
+        </nav>
     </div>
 </section>
 
 <section class="section">
     <div class="container">
-        <div class="section-header fade-in">
-            <span class="section-tag">Our Leadership</span>
-            <h2 class="section-title">Board of Members</h2>
-            <div class="title-divider"></div>
+
+        <!-- Executive Committee Hero -->
+        <div class="committee-hero fade-in">
+            <h2 class="committee-hero-title">Executive Committee</h2>
+            <div class="committee-hero-line"></div>
+            <p class="committee-hero-desc">
+                The Executive Committee provides operational leadership, manages programs,
+                oversees budget allocation, and ensures effective implementation of all
+                organizational initiatives under the guidance of the Advisory Board.
+            </p>
         </div>
-        <form class="site-search" method="get">
-            <input type="search" name="q" value="{{ query }}" placeholder="Search board members">
-            <button class="btn btn-primary" type="submit">Search</button>
-        </form>
-        <div class="team-grid">
-            {% for member in members %}
-            <div class="team-card fade-in">
-                {% if member.photo %}<div class="team-img-wrap"><img src="{{ member.photo.url }}" alt="{{ member.name }}" class="team-img" loading="lazy" decoding="async"></div>{% endif %}
-                <div class="team-info">
-                    <h3 class="team-name">{{ member.name }}</h3>
-                    <span class="team-role">{{ member.designation }}</span>
-                    <p class="team-bio">{{ member.biography }}</p>
-                    <div class="team-social">
-                        {% if member.linkedin_url %}<a href="{{ member.linkedin_url }}" target="_blank" rel="noopener">in</a>{% endif %}
-                        {% if member.facebook_url %}<a href="{{ member.facebook_url }}" target="_blank" rel="noopener">f</a>{% endif %}
-                        {% if member.twitter_url %}<a href="{{ member.twitter_url }}" target="_blank" rel="noopener">x</a>{% endif %}
+
+        <!-- President Feature Card -->
+        {% for member in members %}
+            {% if forloop.first %}
+            <div class="president-card fade-in">
+                <div class="president-card-inner">
+                    <div class="president-portrait">
+                        {% if member.photo %}
+                            <img src="{{ member.photo.url }}" alt="{{ member.name }}" loading="lazy" decoding="async" />
+                        {% else %}
+                            <img src="https://ui-avatars.com/api/?name={{ member.name|urlencode }}&background=087A3E&color=fff&size=500&bold=true" alt="{{ member.name }}" loading="lazy" decoding="async" />
+                        {% endif %}
+                    </div>
+                    <div class="president-info">
+                        <h3 class="president-name">{{ member.name }}</h3>
+                        <span class="president-badge">{{ member.designation }}</span>
+                        <hr class="president-divider">
+                        {% if member.biography %}
+                        <div class="president-quote">
+                            <p>{{ member.biography }}</p>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
+            {% endif %}
+        {% endfor %}
+
+        <!-- Committee Members Section Heading -->
+        <div class="committee-section-heading fade-in">
+            <h2 class="committee-hero-title">Committee Members</h2>
+            <div class="committee-hero-line"></div>
+        </div>
+
+        <!-- Committee Members Grid -->
+        <div class="committee-grid">
+            {% for member in members %}
+                {% if not forloop.first %}
+                <div class="committee-card fade-in">
+                    <div class="committee-avatar">
+                        {% if member.photo %}
+                            <img src="{{ member.photo.url }}" alt="{{ member.name }}" loading="lazy" decoding="async" />
+                        {% else %}
+                            <img src="https://ui-avatars.com/api/?name={{ member.name|urlencode }}&background=155D38&color=fff&size=200&bold=true" alt="{{ member.name }}" loading="lazy" decoding="async" />
+                        {% endif %}
+                        <svg class="committee-wave" viewBox="0 0 200 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 20 Q100 65 200 20 L200 80 L0 80 Z" fill="#FF9418" />
+                        </svg>
+                        <span class="committee-watermark">BREDCLUB</span>
+                    </div>
+                    <h3 class="committee-name">{{ member.name }}</h3>
+                    <span class="committee-role">{{ member.designation }}</span>
+                </div>
+                {% endif %}
             {% empty %}
-            <div class="empty-state">No board members found.</div>
+                <div class="empty-state">No committee members found.</div>
             {% endfor %}
         </div>
+
     </div>
 </section>
 {% endblock %}
